@@ -16,14 +16,13 @@ public class FlappyBirdScene: SKScene {
     
     var start = false
     var birdIsActive = false
-    var pipeHeight: CGFloat = 200
 
     override public func didMove(to view: SKView) {
         
         // make sure the level was set properly
         // TODO: Refactor to ensure compile time safety
         guard let level = level else {
-            fatalError("Level was not set!")
+            fatalError("Level is not set!")
         }
         
         // add background
@@ -49,26 +48,27 @@ public class FlappyBirdScene: SKScene {
         playerNode.size.height = playerNode.size.height / 10
         addChild(playerNode)
         
-        // add pipes
+        // add pipes        
         bottomPipe1 = level.createPipeBottomNode()
-        bottomPipe1.position = CGPoint(x: 0,y: 200);
         bottomPipe1.size.height = bottomPipe1.size.height / 2
         bottomPipe1.size.width = bottomPipe1.size.width / 2
+        bottomPipe1.position = CGPoint(x: 800,y: floorNode1.frame.height + bottomPipe1.size.height / 2)
         
         bottomPipe2 = level.createPipeBottomNode()
-        bottomPipe2.position = CGPoint(x: 1600,y: 200);
         bottomPipe2.size.height = bottomPipe2.size.height / 2
         bottomPipe2.size.width = bottomPipe2.size.width / 2
+        bottomPipe2.position = CGPoint(x: 1600,y: floorNode1.frame.height + bottomPipe2.size.height / 2)
         
         topPipe1 = level.createPipeTopNode()
-        topPipe1.position = CGPoint(x: 800,y: 1000);
         topPipe1.size.height = topPipe1.size.height / 2
         topPipe1.size.width = topPipe1.size.width / 2
+        topPipe1.position = CGPoint(x: 800,y: self.frame.height - topPipe1.size.height / 2)
         
-        topPipe2 = level.createPipeBottomNode()
-        topPipe2.position = CGPoint(x: 1600,y: 1000);
+        
+        topPipe2 = level.createPipeTopNode()
         topPipe2.size.height = topPipe2.size.height / 2
         topPipe2.size.width = topPipe2.size.width / 2
+        topPipe2.position = CGPoint(x: 1600,y: self.frame.height - topPipe2.size.height / 2)
         
         addChild(bottomPipe1)
         addChild(bottomPipe2)
@@ -76,21 +76,41 @@ public class FlappyBirdScene: SKScene {
         addChild(topPipe2)
     }
     
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        start = true
+    }
+    
     override public func update(_ currentTime: TimeInterval) {
         
-        floorNode1.position = CGPoint(x: floorNode1.position.x-4, y: floorNode1.position.y);
-        floorNode2.position = CGPoint(x: floorNode2.position.x-4, y: floorNode2.position.y);
+        if start {
+            let scrollSpeed: CGFloat = 4.0
+            updateFloorPosition(currentTime, speed: scrollSpeed)
+            updatePipePositions(currentTime, speed: scrollSpeed * 1.5)
+        }
+    }
+    
+    private func updateFloorPosition(_ currentTime: TimeInterval, speed: CGFloat) {
+        floorNode1.position = CGPoint(x: floorNode1.position.x-speed, y: floorNode1.position.y)
+        floorNode2.position = CGPoint(x: floorNode2.position.x-speed, y: floorNode2.position.y)
         
-        if (floorNode1.position.x < -floorNode1.size.width / 2){
+        let floorNode1IsNotVisibleAnymore = floorNode1.position.x < -floorNode1.size.width
+        if (floorNode1IsNotVisibleAnymore) {
             floorNode1.position = CGPoint(x: floorNode2.position.x + floorNode2.size.width, y: floorNode1.position.y);
         }
         
-        if (floorNode2.position.x < -floorNode2.size.width / 2) {
+        let floorNode2IsNotVisibleAnymore = floorNode2.position.x < -floorNode2.size.width
+        if (floorNode2IsNotVisibleAnymore) {
             floorNode2.position = CGPoint(x: floorNode1.position.x + floorNode1.size.width, y: floorNode2.position.y);
         }
-        
     }
     
+    private func updatePipePositions(_ currentTime: TimeInterval, speed: CGFloat) {
+        
+        bottomPipe1.position = CGPoint(x: bottomPipe1.position.x-speed, y: bottomPipe1.position.y)
+        bottomPipe2.position = CGPoint(x: bottomPipe2.position.x-speed,y: bottomPipe2.position.y)
+        topPipe1.position = CGPoint(x: topPipe1.position.x-speed, y: topPipe1.position.y);
+        topPipe2.position = CGPoint(x: topPipe2.position.x-speed, y: topPipe2.position.y);
+    }
 }
 
 extension FlappyBirdScene: SKPhysicsContactDelegate {
