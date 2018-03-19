@@ -16,6 +16,10 @@ public class FlappyBirdScene: SKScene {
     
     var start = false
     var birdIsActive = false
+    
+    let birdCategory: UInt32 = 0x1 << 0
+    let pipeCategory: UInt32 = 0x1 << 1
+    let floorCategory: UInt32 = 0x1 << 2
 
     override public func didMove(to view: SKView) {
         
@@ -74,10 +78,71 @@ public class FlappyBirdScene: SKScene {
         addChild(bottomPipe2)
         addChild(topPipe1)
         addChild(topPipe2)
+        
+        // Add physics delegate
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        self.physicsWorld.contactDelegate = self
+
+        floorNode1.physicsBody?.categoryBitMask = floorCategory
+        floorNode1.physicsBody?.contactTestBitMask = birdCategory
+        floorNode2.physicsBody?.categoryBitMask = floorCategory
+        floorNode2.physicsBody?.contactTestBitMask = birdCategory
+        
+        bottomPipe1.physicsBody?.categoryBitMask = pipeCategory
+        bottomPipe1.physicsBody?.contactTestBitMask = birdCategory
+        
+        bottomPipe2.physicsBody?.categoryBitMask = pipeCategory
+        bottomPipe2.physicsBody?.contactTestBitMask = birdCategory
+        
+        topPipe1.physicsBody?.categoryBitMask = pipeCategory
+        topPipe1.physicsBody?.contactTestBitMask = birdCategory
+        
+        topPipe2.physicsBody?.categoryBitMask = pipeCategory
+        topPipe2.physicsBody?.contactTestBitMask = birdCategory
+        
+        bottomPipe1.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: level.pipeBottomImageUrl), size: self.bottomPipe1.size)
+        
+        bottomPipe2.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: level.pipeBottomImageUrl), size: self.bottomPipe2.size)
+        
+        topPipe1.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: level.pipeTopImageUrl), size: self.topPipe1.size)
+        
+        topPipe2.physicsBody = SKPhysicsBody(texture: SKTexture(imageNamed: level.pipeTopImageUrl), size: self.topPipe2.size)
+        
+        floorNode1.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: floorNode2.frame.width, height: floorNode2.frame.height - 20))
+        floorNode2.physicsBody = SKPhysicsBody(edgeLoopFrom: floorNode2.frame)
+
+        bottomPipe1.physicsBody?.isDynamic = false
+        bottomPipe2.physicsBody?.isDynamic = false
+        topPipe1.physicsBody?.isDynamic = false
+        topPipe2.physicsBody?.isDynamic = false
+        floorNode1.physicsBody?.isDynamic = false
+
     }
+    
+
+    func createBirdPhysics() {
+        
+        playerNode.physicsBody = SKPhysicsBody(circleOfRadius: CGFloat(self.playerNode.size.width / 2))
+        
+        playerNode.physicsBody?.linearDamping = 1.2
+        playerNode.physicsBody?.restitution = 0
+        
+        playerNode.physicsBody?.categoryBitMask = birdCategory
+        playerNode.physicsBody?.contactTestBitMask = pipeCategory | floorCategory
+        
+        birdIsActive = true
+        
+    }
+
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         start = true
+        
+        if (birdIsActive) {
+            self.playerNode.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 150))
+        } else {
+            createBirdPhysics()
+        }
     }
     
     override public func update(_ currentTime: TimeInterval) {
@@ -86,6 +151,9 @@ public class FlappyBirdScene: SKScene {
             let scrollSpeed: CGFloat = 4.0
             updateFloorPosition(currentTime, speed: scrollSpeed)
             updatePipePositions(currentTime, speed: scrollSpeed * 1.5)
+            
+            playerNode.position.x = self.frame.width / 2
+            playerNode.physicsBody?.allowsRotation = false
         }
     }
     
@@ -111,8 +179,14 @@ public class FlappyBirdScene: SKScene {
         topPipe1.position = CGPoint(x: topPipe1.position.x-speed, y: topPipe1.position.y);
         topPipe2.position = CGPoint(x: topPipe2.position.x-speed, y: topPipe2.position.y);
     }
+
 }
 
 extension FlappyBirdScene: SKPhysicsContactDelegate {
     
+    public func didBegin(_ contact: SKPhysicsContact) {
+        //GAMEOVER = TRUE
+        start = false
+        print("BIRD HAS MADE CONTACT")
+    }
 }
