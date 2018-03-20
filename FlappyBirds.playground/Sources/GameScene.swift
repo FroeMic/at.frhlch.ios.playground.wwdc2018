@@ -100,7 +100,7 @@ public class GameScene: SKScene {
         started = true
         
         if (playerIsActive) {
-            self.playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 150))
+            self.playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 75))
         } else {
             createPlayerPhysics()
         }

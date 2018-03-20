@@ -16,6 +16,7 @@ public class BackgroundAsset: Asset {
 extension BackgroundAsset {
     
     public class func forestBackground() -> BackgroundAsset {
-        return BackgroundAsset(assetUrl: "background_forest.png", backgroundColor: SKColor(displayP3Red: 0.43, green: 0.75, blue: 0.79, alpha: 1.00))
+        return BackgroundAsset(assetUrl: "background_forest.png", backgroundColor: SKColor(displayP3Red: 0.78, green: 0.98, blue: 1.00, alpha: 1.00))
+    }
     }
 }

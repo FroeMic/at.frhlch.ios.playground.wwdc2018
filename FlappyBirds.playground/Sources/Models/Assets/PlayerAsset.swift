@@ -25,8 +25,8 @@ public class PlayerAsset: Asset {
         playerNode.run(repeatAction)
         
         // resize
-        playerNode.size.width = playerNode.size.width / 10
-        playerNode.size.height = playerNode.size.height / 10
+        playerNode.size.width = playerNode.size.width / 12
+        playerNode.size.height = playerNode.size.height / 12
         
         return playerNode
     }
