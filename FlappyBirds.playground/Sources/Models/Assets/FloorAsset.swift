@@ -27,6 +27,10 @@ extension FloorAsset {
         return FloorAsset(assetUrl: "floor_grass.png")
     }
     
+    public class func concreteFloor() -> FloorAsset {
+        return FloorAsset(assetUrl: "floor_concrete.png")
+    }
+    
 }
 
 

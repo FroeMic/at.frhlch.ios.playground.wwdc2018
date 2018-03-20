@@ -4,6 +4,7 @@ public class GameScene: SKScene {
     
     public var level: Level!
     
+    fileprivate var impulse: CGFloat = 100.0
     fileprivate var started = false
     fileprivate var gameover = false
     fileprivate var playerIsActive = false
@@ -31,8 +32,10 @@ public class GameScene: SKScene {
         initTopPipeNodes()
         
         // Add physics delegate
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        self.physicsWorld.contactDelegate = self
+        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        physicsWorld.contactDelegate = self
+        impulse = (impulse / 4.0) * level.basisSpeed
+        print(impulse)
         
     }
     
@@ -100,7 +103,7 @@ public class GameScene: SKScene {
         started = true
         
         if (playerIsActive) {
-            self.playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 75))
+            self.playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulse))
         } else {
             createPlayerPhysics()
         }

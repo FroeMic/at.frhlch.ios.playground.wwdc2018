@@ -3,7 +3,7 @@ import SpriteKit
 public class ForestLevel: Level {
     
     public var length: CGFloat = 6000.0
-    public var basisSpeed: CGFloat = 4.0
+    public var basisSpeed: CGFloat = 3.0
     
     public let player: PlayerAsset = PlayerAsset.blueBird()
     public let background: BackgroundAsset = BackgroundAsset.forestBackground()

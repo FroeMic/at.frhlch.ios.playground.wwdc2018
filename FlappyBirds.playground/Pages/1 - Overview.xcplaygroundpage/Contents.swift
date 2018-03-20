@@ -15,7 +15,8 @@
 import PlaygroundSupport
 import SpriteKit
 
-let selectedLevel = ForestLevel()
+//let selectedLevel = ForestLevel()
+let selectedLevel = FuturisticLevel()
 
 let viewSize: CGSize = CGSize(width: 375, height: 667)
 
