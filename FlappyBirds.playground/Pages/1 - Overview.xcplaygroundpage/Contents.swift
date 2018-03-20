@@ -15,19 +15,13 @@
 import PlaygroundSupport
 import SpriteKit
 
-//let selectedLevel = ForestLevel()
-let selectedLevel = FuturisticLevel()
-
 let viewSize: CGSize = CGSize(width: 375, height: 667)
-
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: viewSize))
-sceneView.ignoresSiblingOrder = false
 
-let scene = GameScene(size: viewSize)
-scene.scaleMode = .aspectFill
-scene.level = selectedLevel
-sceneView.presentScene(scene)
+let selectedLevel = ForestLevel()
+//let selectedLevel = FuturisticLevel()
+
+let gameDriver = GameDriver(view: sceneView, level: selectedLevel)
 
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
-//: [Previous](@previous) // [Next](@next)

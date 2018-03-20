@@ -3,7 +3,7 @@ import SpriteKit
 public class FuturisticLevel: Level {
     
     public var length: CGFloat = 6000.0
-    public var basisSpeed: CGFloat = 2.0
+    public var basisSpeed: CGFloat = 2.5
     
     public let player: PlayerAsset = PlayerAsset.futuristicBird()
     public let background: BackgroundAsset = BackgroundAsset.futuristicBackground()

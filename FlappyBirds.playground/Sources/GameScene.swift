@@ -3,7 +3,9 @@ import SpriteKit
 public class GameScene: SKScene {
     
     public var level: Level!
+    public var gameOverDelegate: GameOverDelegate?
     
+    fileprivate var distance: CGFloat = 0.0
     fileprivate var impulse: CGFloat = 100.0
     fileprivate var started = false
     fileprivate var gameover = false
@@ -17,10 +19,8 @@ public class GameScene: SKScene {
     fileprivate var topPipes: [SKSpriteNode]!
     
     override public func didMove(to view: SKView) {
-        
         // make sure the level was set properly
         // TODO: Refactor to ensure compile time safety
-
         guard let level = level else {
             fatalError("Level is not set!")
         }
@@ -35,8 +35,17 @@ public class GameScene: SKScene {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         physicsWorld.contactDelegate = self
         impulse = (impulse / 4.0) * level.basisSpeed
-        print(impulse)
-        
+    }
+    
+    public func resetGame() {
+        removeAllChildren()
+        physicsBody = nil
+        physicsWorld.contactDelegate = nil
+        distance = 0.0
+        impulse = 100.0
+        started = false
+        gameover = false
+        playerIsActive = false
     }
     
     private func initBackgroundNode() {
@@ -100,24 +109,32 @@ public class GameScene: SKScene {
     }
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        started = true
-        
-        if (playerIsActive) {
-            self.playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulse))
-        } else {
-            createPlayerPhysics()
+        if gameover {
+            return
         }
+        
+        started = true
+            
+        if !playerIsActive {
+            createPlayerPhysics()
+            return
+        }
+        
+        playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulse))
     }
     
     override public func update(_ currentTime: TimeInterval) {
-        
         if started {
+            
             let scrollSpeed: CGFloat = level?.basisSpeed ?? 4.0
+            distance += scrollSpeed
+            
             updateFloorPosition(currentTime, speed: scrollSpeed)
             updatePipePositions(currentTime, speed: scrollSpeed * 1.5)
             
             playerNode.position.x = self.frame.width / 2
             playerNode.physicsBody?.allowsRotation = false
+            playerNode.isPaused = false
         }
     }
     
@@ -137,7 +154,6 @@ public class GameScene: SKScene {
     }
     
     fileprivate func updatePipePositions(_ currentTime: TimeInterval, speed: CGFloat) {
-        
         for pipeNode in bottomPipes {
             pipeNode.position = CGPoint(x: pipeNode.position.x-speed,  y: pipeNode.position.y)
         }
@@ -145,14 +161,21 @@ public class GameScene: SKScene {
             pipeNode.position = CGPoint(x: pipeNode.position.x-speed,  y: pipeNode.position.y)
         }
     }
+
 }
 
 extension GameScene: SKPhysicsContactDelegate {
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        //GAMEOVER = TRUE
+        if gameover {
+            return
+        }
+        
+        gameover = true
         started = false
-        playerNode.removeAllActions()
-        print("PLAYER HAS MADE CONTACT")
+        playerNode.isPaused = true
+        
+        gameOverDelegate?.gameOver(distance: distance)
+
     }
 }
