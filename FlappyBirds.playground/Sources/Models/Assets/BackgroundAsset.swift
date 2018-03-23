@@ -22,4 +22,8 @@ extension BackgroundAsset {
     public class func futuristicBackground() -> BackgroundAsset {
         return BackgroundAsset(assetUrl: "background_futuristic.png", backgroundColor: SKColor(displayP3Red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00))
     }
+    
+    public class func beachBackground() -> BackgroundAsset {
+        return BackgroundAsset(assetUrl: "background_beach.png", backgroundColor: SKColor(displayP3Red: 0.54, green: 0.92, blue: 0.99, alpha: 1.00))
+    }
 }

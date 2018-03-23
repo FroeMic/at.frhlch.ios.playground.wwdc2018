@@ -21,5 +21,26 @@ public class FuturisticLevel: Level {
         PipeTopAsset.greyPipe(offsetX: 3200.0, height: 130.0)
     ]
     
-    public init() { }
+    public init() {
+        //
+        
+    }
+}
+
+extension FuturisticLevel {
+    
+    fileprivate func generateLevel(for viewHeight: CGFloat, length: CGFloat) -> ( [PipeBottomAsset],  [PipeTopAsset]) {
+        let EASY_DISTANCE: CGFloat = 800.0
+        let NORMAL_DISTANCE: CGFloat = 400.0
+        let CHALLENGING_DISTANCE: CGFloat = 200.0
+        let HARD_DISTANCE: CGFloat = 100.0
+        
+        let MIN_VERTICAL_SPACING: CGFloat = 150.0
+        let MAX_VERTICAL_SPACING: CGFloat = 200.0
+        
+        
+        
+        return ([],[])
+    }
+    
 }

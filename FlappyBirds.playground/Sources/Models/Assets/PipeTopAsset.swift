@@ -37,6 +37,10 @@ extension PipeTopAsset {
         return PipeTopAsset(assetUrl: "pipe_top_grey.png", offsetX: offsetX, height: height)
     }
     
+    public class func yellowPipe(offsetX: CGFloat, height: CGFloat) -> PipeTopAsset {
+        return PipeTopAsset(assetUrl: "pipe_top_yellow.png", offsetX: offsetX, height: height)
+    }
+    
 }
 
 
