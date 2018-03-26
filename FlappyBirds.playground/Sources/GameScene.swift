@@ -5,6 +5,9 @@ public class GameScene: SKScene {
     public var level: Level!
     public var gameOverDelegate: GameOverDelegate?
     
+    fileprivate let jumpSoundAction = SKAction.playSoundFileNamed("sound_jump.wav", waitForCompletion: false)
+    fileprivate let gameoverSoundAction = SKAction.playSoundFileNamed("sound_game_over.wav", waitForCompletion: false)
+        
     fileprivate var distance: CGFloat = 0.0
     fileprivate var impulse: CGFloat = 100.0
     fileprivate var started = false
@@ -121,6 +124,7 @@ public class GameScene: SKScene {
         }
         
         playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulse))
+        run(jumpSoundAction)
     }
     
     override public func update(_ currentTime: TimeInterval) {
@@ -175,6 +179,7 @@ extension GameScene: SKPhysicsContactDelegate {
         started = false
         playerNode.isPaused = true
         
+        run(gameoverSoundAction)
         gameOverDelegate?.gameOver(distance: distance)
 
     }

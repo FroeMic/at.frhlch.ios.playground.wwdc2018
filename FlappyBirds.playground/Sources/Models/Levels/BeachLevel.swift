@@ -21,3 +21,4 @@ public class BeachLevel: Level {
     
     public init() { }
 }
+
