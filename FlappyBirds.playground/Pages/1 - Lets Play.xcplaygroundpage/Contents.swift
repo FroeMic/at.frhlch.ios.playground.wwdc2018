@@ -24,7 +24,7 @@ let selectedLevel = BeachLevel()
 
 // generate a random level
 //let levelGenerator = LevelGenerator()
-//levelGenerator.viewHeight = viewSize.height
+//levelGenerator.viewHeight = viewSize.height - 175.0 // take height of floor into account
 //levelGenerator.length = 15000.0
 //levelGenerator.minimumVerticalDistanceBetweenPipes = 180.0
 //let selectedLevel = FuturisticLevel(generator: levelGenerator)

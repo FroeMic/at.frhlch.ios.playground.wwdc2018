@@ -14,7 +14,7 @@ public class LevelGenerator {
     // Configuration
     public var startPosition: CGFloat = 500.0
     public var length: CGFloat = 10000.0
-    public var viewHeight: CGFloat = 467.0
+    public var viewHeight: CGFloat = 492.0
     public var minimumVerticalDistanceBetweenPipes: CGFloat = 150.0
     public var miniumPipeHeight: CGFloat = 100.0
     // increase the possibility of easy positions by

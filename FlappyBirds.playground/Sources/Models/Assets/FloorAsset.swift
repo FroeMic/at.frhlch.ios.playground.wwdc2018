@@ -12,7 +12,7 @@ public class FloorAsset: Asset {
     public func createSKNode() -> SKSpriteNode {
         let offsetToAllowBirdToFallIntoGrassAndNotHoverAboveIt: CGFloat = -20
         let floorNode = SKSpriteNode(imageNamed: assetUrl)
-        floorNode.size.height = 200.0
+        floorNode.size.height = 175.0
         floorNode.physicsBody?.categoryBitMask = category.categoryBitMask
         floorNode.physicsBody?.contactTestBitMask = category.contactTestBitMask
         floorNode.physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: floorNode.frame.width, height: floorNode.frame.height + offsetToAllowBirdToFallIntoGrassAndNotHoverAboveIt))
