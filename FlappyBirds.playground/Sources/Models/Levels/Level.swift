@@ -8,6 +8,7 @@ public protocol Level {
     var background: BackgroundAsset { get }
     var floor: FloorAsset { get }
     var bottomPipes: [PipeBottomAsset] { get }
-    var topPipes: [PipeTopAsset] { get }
-    
+    var topPipes:  [PipeTopAsset] { get }
+        
 }
+

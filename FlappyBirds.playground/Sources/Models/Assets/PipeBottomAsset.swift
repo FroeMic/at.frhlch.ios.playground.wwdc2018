@@ -44,7 +44,6 @@ extension PipeBottomAsset {
     public class func yellowPipe(offsetX: CGFloat, height: CGFloat) -> PipeBottomAsset {
         return PipeBottomAsset(assetUrl: "pipe_bottom_yellow.png", offsetX: offsetX, height: height)
     }
-    
 }
 
 

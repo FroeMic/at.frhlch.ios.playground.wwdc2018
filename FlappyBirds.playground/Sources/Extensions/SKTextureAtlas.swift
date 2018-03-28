@@ -3,12 +3,12 @@ import SpriteKit
 public extension SKTextureAtlas {
     
     /**
-     * This function returns an SKTextureAtlas as you woudan
+     * This function returns an SKTextureAtlas as you woud
      * expect it by calling SKTextureAtlas(named name: String).
      *
      * This workaround is only neccesary, because
      * SKTextureAtlas(named name: String) did not load
-     * the .atlas files from the resource folder.
+     * the .atlas files from the resource folder in the playground.
      */
     public static func createTextureAtlas(named name: String) -> SKTextureAtlas {
         let subdirectory = name.hasSuffix(".atlas") ? name : name + ".atlas"

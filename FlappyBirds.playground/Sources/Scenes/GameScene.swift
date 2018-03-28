@@ -2,16 +2,22 @@ import SpriteKit
 
 public class GameScene: SKScene {
     
+    // MARK: Public Variables
     public var level: Level!
-    public var gameOverDelegate: GameOverDelegate?
+    public var gameDelegate: GameDelegate?
     
+    // MARK: Private Variables
     fileprivate let jumpSoundAction = SKAction.playSoundFileNamed("sound_jump.wav", waitForCompletion: false)
     fileprivate let gameoverSoundAction = SKAction.playSoundFileNamed("sound_game_over.wav", waitForCompletion: false)
-        
+    fileprivate let gameFinishedSoundAction = SKAction.playSoundFileNamed("sound_level_finished.wav", waitForCompletion: false)
+    
+
+    
     fileprivate var distance: CGFloat = 0.0
     fileprivate var impulse: CGFloat = 100.0
     fileprivate var started = false
     fileprivate var gameover = false
+    fileprivate var finished = false
     fileprivate var playerIsActive = false
     
     fileprivate var backgroundNode: SKSpriteNode!
@@ -21,18 +27,18 @@ public class GameScene: SKScene {
     fileprivate var bottomPipes: [SKSpriteNode]!
     fileprivate var topPipes: [SKSpriteNode]!
     
+    // MARK: Lifecycle
     override public func didMove(to view: SKView) {
-        // make sure the level was set properly
         // TODO: Refactor to ensure compile time safety
         guard let level = level else {
             fatalError("Level is not set!")
         }
         
-        initBackgroundNode()
-        initFloorNodes()
-        initPlayerNode()
-        initBottomPipeNodes()
-        initTopPipeNodes()
+        setupBackgroundNode()
+        setupFloorNodes()
+        setupPlayerNode()
+        setupBottomPipeNodes()
+        setupTopPipeNodes()
         
         // Add physics delegate
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
@@ -51,50 +57,27 @@ public class GameScene: SKScene {
         playerIsActive = false
     }
     
-    private func initBackgroundNode() {
-        backgroundColor = level.background.backgroundColor
-        backgroundNode = level.background.createSKNode()
-        backgroundNode.anchorPoint = CGPoint.zero
-        addChild(backgroundNode)
-    }
-    
-    private func initFloorNodes() {
-        floorNode1 = level.floor.createSKNode()
-        floorNode1.anchorPoint = CGPoint.zero
-        floorNode1.position = CGPoint(x: 0, y: 0)
-        addChild(floorNode1)
-
-        floorNode2 = level.floor.createSKNode()
-        floorNode2.anchorPoint = CGPoint.zero
-        floorNode2.position = CGPoint(x: floorNode1.frame.width-1, y: 0)
-        addChild(floorNode2)
-
-    }
-    
-    private func initPlayerNode() {
-        playerNode =  level.player.createSKNode()
-        playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(playerNode)
-    }
-    
-    private func initBottomPipeNodes() {
-        bottomPipes = []
-        for pipe in level.bottomPipes {
-            let pipeNode = pipe.createSKNode()
-            pipeNode.position = CGPoint(x: pipe.offsetX, y: floorNode1.frame.height + pipeNode.size.height / 2)
-            bottomPipes.append(pipeNode)
-            addChild(pipeNode)
+    // MARK: User Interaction
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if gameover || finished {
+            return
+        }
+        
+        if started {
+            playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulse))
+            run(jumpSoundAction)
+        } else {
+            startGame()
         }
     }
     
-    private func initTopPipeNodes() {
-        topPipes = []
-        for pipe in level.topPipes {
-            let pipeNode = pipe.createSKNode()
-            pipeNode.position = CGPoint(x: pipe.offsetX, y: frame.height - pipeNode.size.height / 2)
-            topPipes.append(pipeNode)
-            addChild(pipeNode)
+    private func startGame() {
+        if playerIsActive {
+            return
         }
+        
+        createPlayerPhysics()
+        started = true
     }
     
     private func createPlayerPhysics() {
@@ -103,42 +86,31 @@ public class GameScene: SKScene {
         
         playerNode.physicsBody?.linearDamping = 1.2
         playerNode.physicsBody?.restitution = 0
-        
         playerNode.physicsBody?.categoryBitMask =  AssetCategory.player.categoryBitMask
         playerNode.physicsBody?.contactTestBitMask =  AssetCategory.player.contactTestBitMask
         
         playerIsActive = true
-        
     }
     
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if gameover {
-            return
-        }
-        
-        started = true
-            
-        if !playerIsActive {
-            createPlayerPhysics()
-            return
-        }
-        
-        playerNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulse))
-        run(jumpSoundAction)
-    }
     
+    // MARK: View Updates
     override public func update(_ currentTime: TimeInterval) {
-        if started {
+        if !started {
+            return
+        }
             
-            let scrollSpeed: CGFloat = level?.basisSpeed ?? 4.0
-            distance += scrollSpeed
+        let scrollSpeed: CGFloat = level?.basisSpeed ?? 4.0
+        distance += scrollSpeed
+        
+        updateFloorPosition(currentTime, speed: scrollSpeed)
+        updatePipePositions(currentTime, speed: scrollSpeed * 1.5)
+        
+        playerNode.position.x = self.frame.width / 2
+        playerNode.physicsBody?.allowsRotation = false
+        playerNode.isPaused = false
             
-            updateFloorPosition(currentTime, speed: scrollSpeed)
-            updatePipePositions(currentTime, speed: scrollSpeed * 1.5)
-            
-            playerNode.position.x = self.frame.width / 2
-            playerNode.physicsBody?.allowsRotation = false
-            playerNode.isPaused = false
+        if let levelDistance = level?.length, levelDistance < distance {
+            finishGame()
         }
     }
     
@@ -165,13 +137,75 @@ public class GameScene: SKScene {
             pipeNode.position = CGPoint(x: pipeNode.position.x-speed,  y: pipeNode.position.y)
         }
     }
+    
+    fileprivate func finishGame() {
+        if finished {
+            return
+        }
+        
+        finished = true
+        run(gameFinishedSoundAction)
+        gameDelegate?.finishedGame(distance: distance)
+    }
 
 }
 
+// MARK: View Setup
+extension GameScene {
+    fileprivate func setupBackgroundNode() {
+        backgroundColor = level.background.backgroundColor
+        backgroundNode = level.background.createSKNode()
+        backgroundNode.anchorPoint = CGPoint.zero
+        addChild(backgroundNode)
+    }
+    
+    fileprivate func setupFloorNodes() {
+        floorNode1 = level.floor.createSKNode()
+        floorNode1.anchorPoint = CGPoint.zero
+        floorNode1.position = CGPoint(x: 0, y: 0)
+        addChild(floorNode1)
+        
+        floorNode2 = level.floor.createSKNode()
+        floorNode2.anchorPoint = CGPoint.zero
+        floorNode2.position = CGPoint(x: floorNode1.frame.width-1, y: 0)
+        addChild(floorNode2)
+        
+    }
+    
+    fileprivate func setupPlayerNode() {
+        playerNode =  level.player.createSKNode()
+        playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        addChild(playerNode)
+    }
+    
+    fileprivate func setupBottomPipeNodes() {
+        bottomPipes = []
+        for pipe in level.bottomPipes {
+            let pipeNode = pipe.createSKNode()
+            pipeNode.position = CGPoint(x: pipe.offsetX, y: floorNode1.frame.height + pipeNode.size.height / 2)
+            bottomPipes.append(pipeNode)
+            addChild(pipeNode)
+        }
+    }
+    
+    fileprivate func setupTopPipeNodes() {
+        topPipes = []
+        for pipe in level.topPipes {
+            let pipeNode = pipe.createSKNode()
+            pipeNode.position = CGPoint(x: pipe.offsetX, y: frame.height - pipeNode.size.height / 2)
+            topPipes.append(pipeNode)
+            addChild(pipeNode)
+        }
+    }
+    
+}
+
+
+// MARK: Protocol SKPhysicsContactDelegate
 extension GameScene: SKPhysicsContactDelegate {
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        if gameover {
+        if gameover || finished {
             return
         }
         
@@ -180,7 +214,7 @@ extension GameScene: SKPhysicsContactDelegate {
         playerNode.isPaused = true
         
         run(gameoverSoundAction)
-        gameOverDelegate?.gameOver(distance: distance)
+        gameDelegate?.gameOver(distance: distance)
 
     }
 }
