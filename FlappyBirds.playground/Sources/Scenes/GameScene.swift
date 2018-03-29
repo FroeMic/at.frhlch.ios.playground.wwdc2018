@@ -54,6 +54,7 @@ public class GameScene: SKScene {
         impulse = 100.0
         started = false
         gameover = false
+        finished = false
         playerIsActive = false
     }
     

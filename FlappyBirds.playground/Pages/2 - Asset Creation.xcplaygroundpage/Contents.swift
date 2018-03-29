@@ -1,3 +1,34 @@
+//
+//import SpriteKit
+//import PlaygroundSupport
+//
+//class GS: SKScene {
+//    override public func didMove(to view: SKView) {
+//        backgroundColor = UIColor.white
+//        setupPlayerNode()
+//    }
+//    
+//    fileprivate func setupPlayerNode() {
+//        let player = PlayerAsset.blueBird()
+//        let playerNode = player.createSKNode()
+//        playerNode.size.width = playerNode.size.width*3
+//        playerNode.size.height = playerNode.size.height*3
+//        playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
+//        addChild(playerNode)
+//    }
+//}
+//
+//let viewSize: CGSize = CGSize(width: 375, height: 667)
+//let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: viewSize))
+//
+//
+//let gameScene = GS(size: viewSize)
+//gameScene.scaleMode = .aspectFill
+//
+//sceneView.presentScene(gameScene)
+//PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
+
+
 //: [Previous](@previous) // [Next](@next)
 
 //:  ## Asset Creation

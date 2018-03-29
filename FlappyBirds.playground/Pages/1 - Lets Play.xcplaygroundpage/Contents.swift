@@ -7,7 +7,7 @@
 👉 I think, the game is best experienced by playing.
  Just select a level and open the _Live View_ in the _Assistant Editor_.
  
-👉 After playing, have a look at the second [playground page](@next), where I highlight my design goals, software engineering aspects and challenges I had to face during development.
+👉 After playing, have a look at the next [playground pages](@next), where I highlight my design goals, software engineering aspects and challenges I had to face during development.
  */
 
 import PlaygroundSupport
