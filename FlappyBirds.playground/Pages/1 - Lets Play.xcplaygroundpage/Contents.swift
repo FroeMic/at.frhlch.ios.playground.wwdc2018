@@ -8,8 +8,13 @@
  Just select a level and open the _Live View_ in the _Assistant Editor_.
  
 👉 After playing, have a look at the next [playground pages](@next), where I highlight my design goals, software engineering aspects and challenges I had to face during development.
+ 
+ [1 - Lets Play](1%20-%20Lets%20Play) 📌 \
+ [2 - Motivation](2%20-%20Motivation) \
+ [3 - Game Architecture](3%20-%20Game%20Architecture) \
+ [4 - Implementation](4%20-%20Implementation)
+ 
  */
-
 import PlaygroundSupport
 import SpriteKit
 
@@ -33,4 +38,4 @@ let selectedLevel = BeachLevel()
 let gameDriver = GameDriver(view: sceneView, level: selectedLevel)
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
-
+//: [Continue Reading](@next)
