@@ -1,10 +1,10 @@
 //: # Hello WWDC 👋
 /*:
  ### ⏰ 3 minutes is not a lot of time, so let's cut right to it.
- My name is *Michael* and I would love the be part of this years WWDC. To show you, I built this playground featuring my first-ever game, inspired by the 2013 classic [Flappy Bird](https://de.wikipedia.org/wiki/Flappy_Bird).
+ My name is *Michael* and I would love to be part of this year's WWDC. To show you, I built this playground featuring my first-ever game, inspired by the 2013 classic [Flappy Bird](https://de.wikipedia.org/wiki/Flappy_Bird).
 
  
-👉 I think, the game is best experienced by playing.
+👉 I think the game is best experienced by playing.
  Just select a level and open the _Live View_ in the _Assistant Editor_.
  
 👉 After playing, have a look at the next [playground pages](@next), where I highlight my design goals, software engineering aspects and challenges I had to face during development.
