@@ -11,8 +11,6 @@ public class GameScene: SKScene {
     fileprivate let gameoverSoundAction = SKAction.playSoundFileNamed("sound_game_over.wav", waitForCompletion: false)
     fileprivate let gameFinishedSoundAction = SKAction.playSoundFileNamed("sound_level_finished.wav", waitForCompletion: false)
     
-
-    
     fileprivate var distance: CGFloat = 0.0
     fileprivate var impulse: CGFloat = 100.0
     fileprivate var started = false
@@ -26,6 +24,16 @@ public class GameScene: SKScene {
     fileprivate var playerNode: SKSpriteNode!
     fileprivate var bottomPipes: [SKSpriteNode]!
     fileprivate var topPipes: [SKSpriteNode]!
+    
+    fileprivate var scrollSpeed: CGFloat {
+        return level?.basisSpeed ?? 4.0
+    }
+    fileprivate var pipeSpeed: CGFloat {
+        return scrollSpeed * 1.5
+    }
+    fileprivate var finalDistance: CGFloat {
+        return (level?.length ?? 0) * scrollSpeed / pipeSpeed
+    }
     
     // MARK: Lifecycle
     override public func didMove(to view: SKView) {
@@ -99,18 +107,17 @@ public class GameScene: SKScene {
         if !started {
             return
         }
-            
-        let scrollSpeed: CGFloat = level?.basisSpeed ?? 4.0
+
         distance += scrollSpeed
         
         updateFloorPosition(currentTime, speed: scrollSpeed)
-        updatePipePositions(currentTime, speed: scrollSpeed * 1.5)
+        updatePipePositions(currentTime, speed: pipeSpeed)
         
         playerNode.position.x = self.frame.width / 2
         playerNode.physicsBody?.allowsRotation = false
         playerNode.isPaused = false
             
-        if let levelDistance = level?.length, levelDistance < distance {
+        if finalDistance < distance {
             finishGame()
         }
     }
