@@ -18,7 +18,7 @@
 import PlaygroundSupport
 import SpriteKit
 
-// 🖥 set the view size of the scene
+// 🖥 set the view size of the scene 
 let viewSize: CGSize = CGSize(width: 375, height: 667)
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: viewSize))
 
