@@ -23,8 +23,8 @@ let viewSize: CGSize = CGSize(width: 375, height: 667)
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: viewSize))
 
 // ➡️ select the level you want to plays
-//let selectedLevel = BeachLevel()
-let selectedLevel = ForestLevel()
+let selectedLevel = BeachLevel()
+//let selectedLevel = ForestLevel()
 //let selectedLevel = FuturisticLevel()
 
 // generate a random level

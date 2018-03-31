@@ -22,9 +22,9 @@
  
  ### ✂️ Asset Creation
  
- Below you can see all asset related objects depicted.
+Below you can see all asset related objects depicted.
  
-  ![Asset Model](asset_model.png)
+![Asset Model](asset_model.png)
  
 **Asset Category** \
  To ensure extensibility and provide and easy interface to create new levels, I needed the games assets to be categorized.
@@ -129,9 +129,59 @@ Examplea are the different initialization of the classes and the `createSKNode()
  Using these static factory functions has one advantage.
  If the assetUrl (= the name of the `.png` file) changed at any time, the code would need to be updated only at this single point.
 
- ### 📐Level Design
- // protocol oriented
+### 📐Level Design
+ 
+For creating the game levels I abstracted a `Level` model, which can be seen in the picture below.
+ 
+![Level Model](level_model.png)
+ 
+**Level Protocol:** \
+The `Level` protocol requires each concrete level to provides assets for the background, the floor, the player and finally the bottom- and topPipes.
+ Additionally, it requires a `length` and a `basisSpeed` property of type `CGFloat`.
+ 
+ ```Swift
+ public protocol Level {
+     var length: CGFloat { get }
+     var basisSpeed: CGFloat { get }
+     var player: PlayerAsset { get }
+     var background: BackgroundAsset { get }
+     var floor: FloorAsset { get }
+     var bottomPipes: [PipeBottomAsset] { get }
+     var topPipes:  [PipeTopAsset] { get }
+ }
+ ```
+ 
+The `length` property defines after which distance the level is successfully finished.
+The `basisSpeed` property defines how fast the floor and the pipes are moving past the screen.
+Which value  works best for the `basisSpeed` depends on the layout of the respective level.
+(It is pretty much a *magic variable* that has to be figured out by trial and error.
+I found that values around `2.0` seem to work quite well.)
+ 
+
+ **Automatic Level Generation:** \
+ 
  // automatic level generation
+ 
  */
 //: [Continue Reading](@next)
 
+public class Test {
+    
+    // MARK: Public Variables
+    
+    /**
+     * An array of possible horizontal distances between
+     * pairs of pipes.
+     *
+     * The `LevelGenerator` will randomly select one of
+     * the values to place the "next" pair of pipes.
+     *
+     * Increase the possibility for certain distances by
+     * adding them multiple times to the array.
+     */
+    public private(set) var pipes: [PipeTopAsset] = []
+}
+
+let t = Test()
+
+t.pipes
