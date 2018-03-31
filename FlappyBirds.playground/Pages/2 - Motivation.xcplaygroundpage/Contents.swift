@@ -1,5 +1,5 @@
 //: ##  Great! You made it to the second page! 😃
-//: ### Let me tell you a bit why and how I created the game.
+//: ### Let me tell you a bit about why and how I created the game.
 /*:
  
  > **Table of Contents:**
@@ -11,17 +11,17 @@
  
  */
 /*:
- ## 1. Overview
+ ## 1. Motivation
  
  ### 🤔 What do I want to take out of this project?
  
- Beyond the chance to be part of the WWDC I wanted to take something away for myself.
+ Beyond the chance to be part of the WWDC — _which would be really awesome_ — I wanted to take something away for myself.
  This is why I chose to do something I had never done before.
- Looking at the WWDC Scholarship homepage I thought "_What better way to showcase creativity than to create a game?_".
+ Looking at the WWDC Scholarship homepage I thought "_What better way to showcase creativity than to create a **game?**_".
  
  ![WWDC 2018 Scholarship Website Screenshot (Adapted)](wwdc_homepage.png)
  
- Creating a game would require me to learn or improve several skills — conceptualizing the game itself, visual and audio design as well as getting to know _SpriteKit_ and the Playground enivornment.
+ Creating a game would require me to learn or improve several skills — conceptualizing the game itself, visual and audio design as well as getting to know _SpriteKit_ and the Playground environment.
  All of this in a little more than 2 weeks.
  Perfect!
 
@@ -30,7 +30,7 @@
  You might ask why, build _Flappy Birds_ then?
  Several reasons!
  
- * The level of complexity seemed perfect for the available time and my experience
+ * The level of complexity seemed perfect for the available time and my experience.
  * The finished project would allow me to explain _SpriteKit_ essentials to friends interested in building their own game.
  * Designing the game assets (for multiple levels) would allow me to give the game a personal touch.
  * And — maybe most importantly — after asking friends which mobile they loved (and hated) most over the years, *FlappyBird* was the one that popped up most often.

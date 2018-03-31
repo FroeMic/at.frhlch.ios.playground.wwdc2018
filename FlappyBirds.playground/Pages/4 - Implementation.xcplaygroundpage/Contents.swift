@@ -22,16 +22,113 @@
  
  ### ✂️ Asset Creation
  
- To create the Assets used in the game, I ...
+ Below you can see all asset related objects depicted.
  
- ![Asset Model](asset_model.png)
+  ![Asset Model](asset_model.png)
  
- // protocol oriented
- // protocol extensions
- // compile time safety -> classes
- // Collison bitmasks using (ENUMS)
- // Adding new asset types by static factory functions (Extensibility)
+**Asset Category** \
+ To ensure extensibility and provide and easy interface to create new levels, I needed the games assets to be categorized.
+ For this game I identified 4 different `AssetCategories`, which are represented as an enum in code.
  
+ ```Swift
+ public enum AssetCategory: UInt32 {
+ 
+     case player     = 0b0001 // 0x1 << 0
+     case pipe       = 0b0010 // 0x1 << 1
+     case floor      = 0b0100 // 0x1 << 2
+     case background = 0b1000 // 0x1 << 3
+ 
+     public var categoryBitMask: UInt32 {
+        return self.rawValue
+     }
+ 
+    // ...
+ 
+ }
+ ```
+ 
+ * **.player:** The asset representing the game avatar the user is controlling
+ * **.pipe:** A pipe which blocks the way of the player
+ * **.floor:** The floor of level
+ * **.background:** The background image of the level
+ 
+ The raw value of the enum is an `UInt32` and as each case is represented by a bitmask this allows to define the *contactTestBitMask* for each category.
+Thanks to Swift enum's I could easily do so by adding a computed property.
+The *contactTestBitMask* are later used to tell the responsible *SKPhysicsContactDelegate* which objects should collide with each other. More on this later.
+ 
+
+ ```Swift
+ public enum AssetCategory: UInt32 {
+ 
+ // ...
+ 
+ public var contactTestBitMask: UInt32 {
+     switch self {
+         case .player:
+            return AssetCategory.pipe.categoryBitMask | AssetCategory.floor.categoryBitMask
+         case .pipe:
+            return AssetCategory.player.categoryBitMask
+         case .floor:
+            return AssetCategory.player.categoryBitMask
+         case .background:
+            return 0
+     }
+ }
+ ```
+ 
+ What the *contactTestBitMask* property translates to is the following: Everytime two *Assets* collide the *SKPhysicsContactDelegate*, if one of the following conditions is true.
+ 
+  * The first object is of category **.player**, the second one is either of category  **.pipe** or **.floor**
+  * The first object is of category **.pipe**, the second one is of category  **.player**
+  * The first object is of category **.floor**, the second one is of category  **.player**
+ 
+
+ **Asset Creation:** \
+ To create Assets I defined a protocol `Asset` which requires an `assetUrl` of type `String` to point to the respective image in the *Resources* folder and a `category` of type `AssetCategory`.
+ 
+ Additionally, I used a protocol extension to add default functionality for each of the implementing classes.
+ The `createSKNode()` creates and returns a corresponding `SKSpriteNode` from the `assetUrl`.
+ 
+ ```Swift
+ public protocol Asset {
+    var assetUrl: String { get }
+    var category: AssetCategory { get }
+ }
+ 
+ extension Asset {
+    public func createSKNode() -> SKSpriteNode {
+        return SKSpriteNode(imageNamed: assetUrl)
+    }
+ }
+ ```
+ 
+ Finally, I created 5 classes which implement the `Asset` protocol, thereby ensuring compile time type safety and adding additional behavior.
+ 
+ * **PlayerAsset**
+ * **PipeBottomAsset**
+ * **PipeTopAsset**
+ * **FloorAsset**
+ * **BackgroundAsset**
+ 
+All of the classes implementing the `Asset` protocol differ slightly in their behavior.
+Examplea are the different initialization of the classes and the `createSKNode()` function which is implemented seperately in most cases.
+
+ **Adding new Assets:** \
+ Adding new assets, can now be done easily by adding a new class function to the classes implementing the `Asset` protocol and specifiying their `assetUrl` property.
+ For example, a new background asset could be added like this:
+ 
+ ```Swift
+ extension BackgroundAsset {
+ 
+     public class func newBackground() -> BackgroundAsset {
+        return BackgroundAsset(assetUrl: "background_new.png", backgroundColor: SKColor(displayP3Red: 0.82, green: 0.97, blue: 1.00, alpha: 1.00))
+     }
+ }
+ ```
+ 
+ Using these static factory functions has one advantage.
+ If the assetUrl (= the name of the `.png` file) changed at any time, the code would need to be updated only at this single point.
+
  ### 📐Level Design
  // protocol oriented
  // automatic level generation

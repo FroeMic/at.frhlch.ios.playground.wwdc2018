@@ -14,8 +14,8 @@
  ### 💡 Design Goals
  Before starting the implementation of the game I set a few design goals to adhere to:
  
- * **Extensibility**: Adding new levels should be easy
- * **Clean Code**: Expressive and easy to understand code
+ * **Extensibility**: Adding new levels should be easy.
+ * **Clean Code**: My code should be modular, expressive and easy to understand.
  * **Transfer Value**: I should be able to use the playground as an example to explain *SpriteKit* basics to friends and students who want to create their own game.
  
  ### 💎 Game Aesthestics
@@ -28,12 +28,12 @@
  * create (simple) sound effects
  
  For creating the visual game assets I used [Sketch](https://www.sketchapp.com/) and for creating the sound effects I made use of a tool called [Bfxr](https://www.bfxr.net/).
- While there clearly is room for improvement (especially on the audio side), I am proud to say that all assets — such as Henry here for example — that are used in the game are original designs by myself. 💪
+ While there clearly is room for improvement (especially on the audio side), I am proud to say that all assets — such as _Henry_ here for example — that are used in the game are original designs done by myself. 💪
  
  ![Meet Henry](meet_henry.gif)
  
  ### ⚙️ Object Model
- Let's get a bit more technical. 🤓
+ Let's get a bit more technical now. 🤓
  Below you can see the object model of the game.
  It conceptualizes how the different objects in the game relate to each other.
  It helped me to plan ahead before starting to code and how to interface with _SpriteKit_.
@@ -53,6 +53,7 @@
  Additionally, each level has properties describing its *basisSpeed* and *length*.
  
  While all **Assets** differ in detail, they all implement the **Asset** protocol to share functionality to turn *.png* based visuals to *SKSpriteNodes*.
- Each **Asset** has an associated enum **AssetCategory** which is based on a bitmask that allows to distinguish which object should or should not collide in the game.
+ Each **Asset** has an associated enum **AssetCategory** whose raw type is a *UInt32*.
+ Each enum value encodes a bitmask that later allows to distinguish which objects should or should not collide in the game.
  */
 //: [Continue Reading](@next)
