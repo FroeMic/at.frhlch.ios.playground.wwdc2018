@@ -157,12 +157,9 @@ Which value  works best for the `basisSpeed` depends on the layout of the respec
 (It is pretty much a *magic variable* that has to be figured out by trial and error.
 I found that values around `2.0` seem to work quite well.)
  
-**Automatic Level Generation:** \
+Finally, on the screen the `Level` model is then displayed as depicted in the following picture.
  
- 
- // automatic level generation
+![Level Composition](level_composition.png)
  
  */
-//: [Continue Reading](@next)
-
-
+//: [Back to the Beginning](1%20-%20Lets%20Play)
