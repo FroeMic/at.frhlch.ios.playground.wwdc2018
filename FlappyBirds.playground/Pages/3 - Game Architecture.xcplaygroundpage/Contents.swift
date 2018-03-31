@@ -18,7 +18,7 @@
  * **Clean Code**: My code should be modular, expressive and easy to understand.
  * **Transfer Value**: I should be able to use the playground as an example to explain *SpriteKit* basics to friends and students who want to create their own game.
  
- ### 💎 Game Aesthestics
+ ### 💎 Game Aesthetics
  
  In addition to learning to work with *SpriteKit* I wanted to create all assets used in the game myself and not rely on 3rd party sources.
  In particular this meant that I had to
@@ -27,7 +27,7 @@
  * animate the player objects
  * create (simple) sound effects
  
- For creating the visual game assets I used [Sketch](https://www.sketchapp.com/) and for creating the sound effects I made use of a tool called [Bfxr](https://www.bfxr.net/).
+ For creating the visual game assets I used [Sketch](https://www.sketchapp.com/) and for creating the sound effects I made use of a tool called [Bfxr](https://www.bfxr.net/) and [Garage Band](https://www.apple.com/mac/garageband/).
  While there clearly is room for improvement (especially on the audio side), I am proud to say that all assets — such as _Henry_ here for example — that are used in the game are original designs done by myself. 💪
  
  ![Meet Henry](meet_henry.gif)

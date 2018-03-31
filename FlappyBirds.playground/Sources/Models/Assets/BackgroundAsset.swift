@@ -24,6 +24,6 @@ extension BackgroundAsset {
     }
     
     public class func beachBackground() -> BackgroundAsset {
-        return BackgroundAsset(assetUrl: "background_beach.png", backgroundColor: SKColor(displayP3Red: 0.54, green: 0.92, blue: 0.99, alpha: 1.00))
+        return BackgroundAsset(assetUrl: "background_beach.png", backgroundColor: SKColor(displayP3Red: 0.63, green: 0.94, blue: 0.99, alpha: 1.00))
     }
 }
