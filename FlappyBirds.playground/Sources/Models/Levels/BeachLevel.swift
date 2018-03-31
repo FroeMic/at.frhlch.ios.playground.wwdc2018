@@ -5,7 +5,7 @@ public class BeachLevel: Level {
     public var basisSpeed: CGFloat = 2.0
     public var length: CGFloat = 6100.0
     
-    public let player: PlayerAsset = PlayerAsset.blueBird()
+    public let player: PlayerAsset = PlayerAsset.pinkBird()
     public let background: BackgroundAsset = BackgroundAsset.beachBackground()
     public let floor: FloorAsset = FloorAsset.beachFloor()
     public let bottomPipes: [PipeBottomAsset] = [

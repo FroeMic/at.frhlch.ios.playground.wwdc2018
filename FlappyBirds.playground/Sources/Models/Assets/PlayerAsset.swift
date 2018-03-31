@@ -35,7 +35,7 @@ public class PlayerAsset: Asset {
 
 extension PlayerAsset {
 
-    public class func blueBird() -> PlayerAsset {
+    public class func pinkBird() -> PlayerAsset {
         return PlayerAsset(assetUrl: "player_default.atlas")
     }
     
