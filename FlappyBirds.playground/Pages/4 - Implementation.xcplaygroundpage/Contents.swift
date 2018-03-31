@@ -157,31 +157,12 @@ Which value  works best for the `basisSpeed` depends on the layout of the respec
 (It is pretty much a *magic variable* that has to be figured out by trial and error.
 I found that values around `2.0` seem to work quite well.)
  
-
- **Automatic Level Generation:** \
+**Automatic Level Generation:** \
+ 
  
  // automatic level generation
  
  */
 //: [Continue Reading](@next)
 
-public class Test {
-    
-    // MARK: Public Variables
-    
-    /**
-     * An array of possible horizontal distances between
-     * pairs of pipes.
-     *
-     * The `LevelGenerator` will randomly select one of
-     * the values to place the "next" pair of pipes.
-     *
-     * Increase the possibility for certain distances by
-     * adding them multiple times to the array.
-     */
-    public private(set) var pipes: [PipeTopAsset] = []
-}
 
-let t = Test()
-
-t.pipes

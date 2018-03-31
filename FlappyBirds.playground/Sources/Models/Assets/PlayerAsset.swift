@@ -39,6 +39,10 @@ extension PlayerAsset {
         return PlayerAsset(assetUrl: "player_default.atlas")
     }
     
+    public class func blueBird() -> PlayerAsset {
+        return PlayerAsset(assetUrl: "player_blue.atlas")
+    }
+    
     public class func futuristicBird() -> PlayerAsset {
         return PlayerAsset(assetUrl: "player_futuristic.atlas")
     }

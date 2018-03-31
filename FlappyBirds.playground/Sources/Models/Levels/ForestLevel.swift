@@ -5,7 +5,7 @@ public class ForestLevel: Level {
     public var length: CGFloat = 12000.0
     public var basisSpeed: CGFloat = 2.0
     
-    public let player: PlayerAsset = PlayerAsset.pinkBird()
+    public let player: PlayerAsset = PlayerAsset.blueBird()
     public let background: BackgroundAsset = BackgroundAsset.forestBackground()
     public let floor: FloorAsset = FloorAsset.grassFloor()
     public let bottomPipes: [PipeBottomAsset] = [

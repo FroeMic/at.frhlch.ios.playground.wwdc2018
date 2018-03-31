@@ -22,7 +22,7 @@ import SpriteKit
 let viewSize: CGSize = CGSize(width: 375, height: 667)
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: viewSize))
 
-// ➡️ select the level you want to plays
+// ➡️ select the level you want to play
 let selectedLevel = BeachLevel()
 //let selectedLevel = ForestLevel()
 //let selectedLevel = FuturisticLevel()
