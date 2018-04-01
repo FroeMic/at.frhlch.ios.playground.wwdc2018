@@ -3,7 +3,7 @@ import SpriteKit
 public class BeachLevel: Level {
     
     public var basisSpeed: CGFloat = 2.0
-    public var length: CGFloat = 500.0 //6100.0
+    public var length: CGFloat = 6100.0
     
     public let player: PlayerAsset = PlayerAsset.pinkBird()
     public let background: BackgroundAsset = BackgroundAsset.beachBackground()

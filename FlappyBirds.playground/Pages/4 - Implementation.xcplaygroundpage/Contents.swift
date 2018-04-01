@@ -15,7 +15,7 @@
  Let me tell you a bit about the actual implementation.
  
  Already before I wrote the first line of code for this project, I knew I wanted to use the rich set of opportunities Swift 4 provides.
- I was particularly interested in using the "_Start-With-A-Protocol_" paradigm together with Swift's protocol extensions that I first heard about in the the 2015 WWDC session [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/) by Dave Abrahams.
+ I was particularly interested in using the "_Start-With-A-Protocol_" paradigm together with Swift's protocol extensions that I first heard about in the 2015 WWDC session [Protocol-Oriented Programming in Swift](https://developer.apple.com/videos/play/wwdc2015/408/) by Dave Abrahams.
  Both for my **Level** and **Asset** abstractions I started with a protocol and added common functionality through extensions of said protocols.
  Additionally, I used enums to abstract the _contact bitmasks_ of the different asset types into expressive categories.
  
@@ -27,7 +27,7 @@ Below you can see all asset related objects depicted.
 ![Asset Model](asset_model.png)
  
 **Asset Category** \
- To ensure extensibility and provide and easy interface to create new levels, I needed the games assets to be categorized.
+ To ensure extensibility and provide an easy interface to create new levels, I needed the games assets to be categorized.
  For this game I identified 4 different `AssetCategories`, which are represented as an enum in code.
  
  ```Swift
@@ -111,7 +111,7 @@ The *contactTestBitMask* are later used to tell the responsible *SKPhysicsContac
  * **BackgroundAsset**
  
 All of the classes implementing the `Asset` protocol differ slightly in their behavior.
-Examplea are the different initialization of the classes and the `createSKNode()` function which is implemented seperately in most cases.
+Examples are the different initialization of the classes and the `createSKNode()` function which is implemented seperately in most cases.
 
  **Adding new Assets:** \
  Adding new assets, can now be done easily by adding a new class function to the classes implementing the `Asset` protocol and specifiying their `assetUrl` property.
@@ -127,7 +127,7 @@ Examplea are the different initialization of the classes and the `createSKNode()
  ```
  
  Using these static factory functions has one advantage.
- If the assetUrl (= the name of the `.png` file) changed at any time, the code would need to be updated only at this single point.
+ If the assetUrl (= the name of the `.png` file) changes at any time, the code needs to be updated only at this single point.
 
 ### 📐Level Design
  
@@ -153,7 +153,7 @@ The `Level` protocol requires each concrete level to provides assets for the bac
  
 The `length` property defines after which distance the level is successfully finished.
 The `basisSpeed` property defines how fast the floor and the pipes are moving past the screen.
-Which value  works best for the `basisSpeed` depends on the layout of the respective level.
+Which value works best for the `basisSpeed` depends on the layout of the respective level.
 (It is pretty much a *magic variable* that has to be figured out by trial and error.
 I found that values around `2.0` seem to work quite well.)
  

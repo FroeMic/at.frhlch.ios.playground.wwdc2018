@@ -31,9 +31,9 @@
  Several reasons!
  
  * The level of complexity seemed perfect for the available time and my experience.
- * The finished project would allow me to explain _SpriteKit_ essentials to friends interested in building their own game.
+ * The finished project would allow me to explain _SpriteKit_ essentials to friends interested in building their own games.
  * Designing the game assets (for multiple levels) would allow me to give the game a personal touch.
- * And — maybe most importantly — after asking friends which mobile they loved (and hated) most over the years, *FlappyBird* was the one that popped up most often.
+ * And — maybe most importantly — after asking friends which mobile games they loved (and hated) most over the years, *FlappyBird* was the one that popped up most often.
  */
 //: [Continue Reading](@next)
 

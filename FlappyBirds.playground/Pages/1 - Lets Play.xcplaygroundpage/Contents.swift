@@ -22,17 +22,52 @@ import SpriteKit
 let viewSize: CGSize = CGSize(width: 375, height: 667)
 let sceneView = SKView(frame: CGRect(origin: CGPoint.zero, size: viewSize))
 
-// ➡️ select the level you want to play
+//:  ➡️ **select the level you want to play**
 let selectedLevel = BeachLevel()
 //let selectedLevel = ForestLevel()
 //let selectedLevel = FuturisticLevel()
-
-// generate a random level
+//: ➡️ **or generate a random level**
 //let levelGenerator = LevelGenerator()
 //levelGenerator.viewHeight = viewSize.height - 175.0 // take height of floor into account
 //levelGenerator.length = 15000.0
 //levelGenerator.minimumVerticalDistanceBetweenPipes = 180.0
 //let selectedLevel = FuturisticLevel(generator: levelGenerator)
+
+//: ➡️ **or create your own custom level**
+//public class CustomLevel: Level {
+//
+//    public var basisSpeed: CGFloat = 2.0
+//
+//    public let player: PlayerAsset = PlayerAsset.pinkBird()
+//    public let background: BackgroundAsset = BackgroundAsset.beachBackground()
+//    public let floor: FloorAsset = FloorAsset.concreteFloor()
+//    public let bottomPipes: [PipeBottomAsset]
+//    public let topPipes: [PipeTopAsset]
+//    public let length: CGFloat
+//
+//    public init(generator: LevelGenerator? = nil) {
+//
+//        var levelGenerator: LevelGenerator!
+//        if generator == nil {
+//            levelGenerator = LevelGenerator()
+//            levelGenerator.createTopAsset = PipeTopAsset.greyPipe
+//            levelGenerator.createBottomAsset = PipeBottomAsset.greyPipe
+//            levelGenerator.length = 1000.0
+//        } else {
+//            levelGenerator = generator
+//        }
+//
+//        levelGenerator.generateLevel()
+//
+//        self.length = levelGenerator.length
+//        self.bottomPipes = levelGenerator.bottomPipes
+//        self.topPipes = levelGenerator.topPipes
+//    }
+//}
+//
+//let selectedLevel =  CustomLevel()
+
+
 
 // 🎮 let's play (just click on the view)
 let gameDriver = GameDriver(view: sceneView, level: selectedLevel)
