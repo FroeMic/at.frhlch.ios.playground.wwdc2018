@@ -21,7 +21,7 @@ import SpriteKit
 // Define a custom level
 class CustomLevelWithRandomLayout: Level {
     
-    var basisSpeed: CGFloat = 2.0
+    let basisSpeed: CGFloat = 2.0
     let player: PlayerAsset = PlayerAsset.pinkBird()
     let background: BackgroundAsset = BackgroundAsset.beachBackground()
     let floor: FloorAsset = FloorAsset.concreteFloor()

@@ -34,7 +34,7 @@ extension PipeTopAsset {
 // Define a custom level
 class CustomLevelWithOrangePipes: Level {
     
-    var basisSpeed: CGFloat = 2.0
+    let basisSpeed: CGFloat = 2.0
     let length: CGFloat = 1250.0
     let player: PlayerAsset = PlayerAsset.pinkBird()
     let background: BackgroundAsset = BackgroundAsset.beachBackground()
