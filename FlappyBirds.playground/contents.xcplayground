@@ -3,6 +3,7 @@
     <pages>
         <page name='1 - Lets Play'/>
         <page name='1.1 Custom Level'/>
+        <page name='1.2 Custom Assets'/>
         <page name='2 - Motivation'/>
         <page name='3 - Game Architecture'/>
         <page name='4 - Implementation'/>

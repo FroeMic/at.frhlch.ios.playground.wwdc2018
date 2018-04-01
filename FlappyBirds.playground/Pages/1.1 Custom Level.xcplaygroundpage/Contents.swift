@@ -3,17 +3,18 @@
 import PlaygroundSupport
 import SpriteKit
 
-public class CustomLevel: Level {
+// Define a custom level
+class CustomLevel: Level {
 
-    public var basisSpeed: CGFloat = 2.0
-    public let length: CGFloat = 1250.0
-    public let player: PlayerAsset = PlayerAsset.pinkBird()
-    public let background: BackgroundAsset = BackgroundAsset.beachBackground()
-    public let floor: FloorAsset = FloorAsset.concreteFloor()
-    public let bottomPipes: [PipeBottomAsset] = [
+    var basisSpeed: CGFloat = 2.0
+    let length: CGFloat = 1250.0
+    let player: PlayerAsset = PlayerAsset.pinkBird()
+    let background: BackgroundAsset = BackgroundAsset.beachBackground()
+    let floor: FloorAsset = FloorAsset.concreteFloor()
+    let bottomPipes: [PipeBottomAsset] = [
         // add more pipes as you like
     ]
-    public let topPipes: [PipeTopAsset] = [
+    let topPipes: [PipeTopAsset] = [
         PipeTopAsset.yellowPipe(offsetX: 700.0, height: 200.0),
         PipeTopAsset.greenPipe(offsetX: 800.0, height: 250.0),
         PipeTopAsset.yellowPipe(offsetX: 900.0, height: 300.0),
@@ -22,7 +23,6 @@ public class CustomLevel: Level {
         PipeTopAsset.greenPipe(offsetX: 1200.0, height: 200.0),
         // add more pipes as you like
     ]
-    
 
 }
 
@@ -37,3 +37,4 @@ let selectedLevel =  CustomLevel()
 let gameDriver = GameDriver(view: sceneView, level: selectedLevel)
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView
 
+//: [Continue Reading](@next)
