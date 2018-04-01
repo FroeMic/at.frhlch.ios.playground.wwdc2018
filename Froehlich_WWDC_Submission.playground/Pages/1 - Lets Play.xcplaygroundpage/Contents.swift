@@ -5,7 +5,7 @@
 
  
 👉 I think the game is best experienced by playing.
- Just select a level and open the _Live View_ in the _Assistant Editor_.
+ Just select a level and open the _Live View_ in the _Assistant Editor_. (🔈 make sure to have sound turned on)
  
 👉 After playing, have a look at the following pages with advanced [Examples](1.1%20Custom%20Level) how to create your own levels and the [Write-Up](2%20-%20Motivation), where I highlight my design goals, software engineering aspects and challenges I had to face during development.
  
