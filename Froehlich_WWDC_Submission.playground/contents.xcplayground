@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' display-mode='rendered'>
+    <pages>
+        <page name='1 - Lets Play'/>
+        <page name='1.1 Custom Level'/>
+        <page name='1.2 Custom Assets'/>
+        <page name='1.3 Random Level'/>
+        <page name='1.4 Custom Random Level'/>
+        <page name='2 - Motivation'/>
+        <page name='3 - Game Architecture'/>
+        <page name='4 - Implementation'/>
+    </pages>
+</playground>
